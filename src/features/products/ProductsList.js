@@ -1,16 +1,9 @@
 import React from 'react'
 import { useGetProductsQuery } from '../api/productsApi'
+import ProductListItem from './ProductListItem'
 
 const ProductsList = () => {
   const { data: products, error, isLoading } = useGetProductsQuery()
-
-  console.log('products', products)
-
-  try {
-    
-  } catch (error) {
-    
-  }
 
   if (isLoading) return <h1>Loading...</h1>
   if (error)
@@ -23,7 +16,11 @@ const ProductsList = () => {
   return (
     <>
       <h1>Products</h1>
-      {products.map((product) => <div key={product.id}>{product.title}</div>)}
+      {products.map((product) => (
+        <div key={product.id}>
+          <ProductListItem product={product} />
+        </div>
+      ))}
     </>
   )
 }
